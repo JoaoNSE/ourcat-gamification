@@ -44,9 +44,15 @@ export function CommonHeader() {
       </div>
 
       {user && (
-        <button className="common-header__logout-button" onClick={handleLogout}>
-          Sair
-        </button>
+        <div className="common-header__user">
+          <div>Olá, {user.name} </div>
+          <button
+            className="common-header__logout-button"
+            onClick={handleLogout}
+          >
+            Sair
+          </button>
+        </div>
       )}
       {!user && (
         <button

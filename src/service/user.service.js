@@ -20,6 +20,10 @@ class UserService {
     });
   }
 
+  async findUserById(id) {
+    return this.db.User.findByPk(id);
+  }
+
   // async insertModule(title, content, experience) {
   //   return this.db.Module.create({
   //     title,

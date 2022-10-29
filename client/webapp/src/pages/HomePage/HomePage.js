@@ -7,12 +7,17 @@ import "./style.css";
 export function HomePage() {
   const navigate = useNavigate();
   const [modules, setModules] = useState([]);
+  const [user, setUser] = useState();
 
   useEffect(() => {
-    getModules();
+    getModulesAndUser();
 
-    async function getModules() {
-      console.log("getds");
+    async function getModulesAndUser() {
+      try {
+        const user = await ApiWrapperService.getMe();
+        setUser(user);
+      } catch (err) {}
+
       setModules(await ApiWrapperService.getAllModules());
     }
   }, []);
@@ -31,6 +36,13 @@ export function HomePage() {
                   <button onClick={() => navigate(`/module/${module.id}`)}>
                     Ler
                   </button>
+                  {user?.role == "CREATOR" && (
+                    <button
+                      onClick={() => navigate(`/module/${module.id}/edit`)}
+                    >
+                      Editar
+                    </button>
+                  )}
                 </span>
               </div>
             );
