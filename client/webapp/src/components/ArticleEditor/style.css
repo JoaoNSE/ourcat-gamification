@@ -1,0 +1,42 @@
+.editor__editor {
+  margin: 20px 60px;
+}
+
+.editor__toolbar {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+}
+
+.editor__toolbar-button {
+  cursor: pointer;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editor__toolbar-button:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+.editor__toolbar-separator {
+  margin: 0px 8px;
+  color: rgb(190, 190, 190);
+}
+
+.editor__toolbar-save-btn {
+  margin-left: auto;
+  background-color: #0052cc;
+  color: rgb(255, 255, 255);
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.editor__toolbar-save-btn:hover {
+  background-color: #2071ec;
+}

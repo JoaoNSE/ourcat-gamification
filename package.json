@@ -1,0 +1,35 @@
+{
+  "name": "ourcat-gamification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "echo \"no tests yet\" && exit 1",
+    "sequelize": "node_modules/.bin/sequelize"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoaoNSE/ourcat-gamification.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoaoNSE/ourcat-gamification/issues"
+  },
+  "homepage": "https://github.com/JoaoNSE/ourcat-gamification#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.25.3",
+    "sqlite3": "^5.1.2"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.1"
+  }
+}
