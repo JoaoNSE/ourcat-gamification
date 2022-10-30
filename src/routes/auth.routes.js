@@ -39,4 +39,10 @@ router.get("/auth/logout", async (req, res) => {
   res.json({ message: "Logout successful" });
 });
 
+router.get("/users/:id/courses", async (req, res) => {
+  const { id } = req.params;
+  const courses = await userService.findUserCourses(id);
+  res.json(courses);
+});
+
 module.exports = router;

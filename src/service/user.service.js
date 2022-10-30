@@ -24,30 +24,37 @@ class UserService {
     return this.db.User.findByPk(id);
   }
 
-  // async insertModule(title, content, experience) {
-  //   return this.db.Module.create({
-  //     title,
-  //     content,
-  //     experience,
-  //   });
-  // }
+  async findUserCourses(userId) {
+    let courses = await this.db.Course.findAll({
+      where: {
+        "$userCourseModules.userId$": userId,
+      },
+      include: [{ model: this.db.UserCourseModules }],
+    });
 
-  // async updateModuleContent(id, content) {
-  //   const currentMod = await this.db.Module.findByPk(id);
-  //   if (!currentMod) {
-  //     return null;
-  //   }
+    courses = await Promise.all(
+      courses.map(async (course) => {
+        let nCourse = course.dataValues;
+        const modules = await course.getModules();
+        nCourse.modules = nCourse.UserCourseModules.map((module) => {
+          const compMod = modules.find((m) => m.id === module.moduleId);
 
-  //   currentMod.content = content;
+          return {
+            id: compMod.id,
+            title: compMod.title,
+            experience: compMod.experience,
+            completed: module.completed ? true : false,
+            earnedXp: module.earnedXp,
+          };
+        });
 
-  //   await currentMod.save({ fields: ["content"] });
+        delete nCourse.UserCourseModules;
+        return nCourse;
+      })
+    );
 
-  //   return currentMod;
-  // }
-
-  // async findModuleById(id) {
-  //   return this.db.Module.findByPk(id);
-  // }
+    return courses;
+  }
 }
 
 module.exports = UserService;

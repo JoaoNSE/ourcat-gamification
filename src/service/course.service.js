@@ -19,13 +19,49 @@ class CourseService {
     return this.db.Course.findAll();
   }
 
-  async findCourseById(id) {
-    return this.db.Course.findOne({
+  async findCourseById(id, embedModules = false) {
+    let course = await this.db.Course.findOne({
       where: {
         id,
       },
+      include: embedModules ? this.db.Module : [],
+    });
+
+    if (!course) return null;
+
+    course = course.dataValues;
+
+    course.modules =
+      course?.Modules?.map((module) => {
+        const val = module.dataValues;
+        delete val.CourseId;
+        return val;
+      }) || [];
+
+    delete course.Modules;
+    return course;
+  }
+
+  async findCourseByIdWithUserProgress(courseId, userId, embedModules = false) {
+    const course = await this.db.Course.findOne({
+      where: {
+        id: courseId,
+      },
       include: this.db.Module,
     });
+
+    if (!course) return null;
+
+    let progress = await course.getUserCourseModules({ where: { userId } });
+
+    console.log(progress);
+
+    let values = course.dataValues;
+    values.userProgress = progress.map((p) => p.dataValues);
+
+    delete Object.assign(values, { modules: values.Modules }).Modules;
+
+    return values;
   }
 
   async updateCourseById(id, badgeImageRef, name, description) {

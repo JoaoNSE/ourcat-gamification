@@ -20,10 +20,19 @@ class CourseController {
 
   async getCourse(req, res, next) {
     try {
-      const course = await this.courseService.findCourseById(req.params.id);
+      let course;
+
+      if (req.session.user) {
+        course = await this.courseService.findCourseByIdWithUserProgress(
+          req.params.id,
+          req.session.user.id
+        );
+      } else {
+        course = await this.courseService.findCourseById(req.params.id);
+      }
 
       if (!course) {
-        return res.status(404);
+        return res.status(404).json();
       }
 
       res.status(200).json(course);
@@ -43,7 +52,7 @@ class CourseController {
       );
 
       if (newCourse == null) {
-        return res.status(404);
+        return res.status(404).json();
       }
 
       return res.status(202).json(newCourse);
@@ -114,7 +123,7 @@ class CourseController {
       );
 
       if (module == null) {
-        return res.status(404);
+        return res.status(404).json();
       }
 
       res.status(202).json(module);
