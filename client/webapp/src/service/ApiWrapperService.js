@@ -10,33 +10,6 @@ const api = axios.create({
 
 //Separate into Subservice (one for each entity)
 
-async function getAllModules() {
-  try {
-    return (await api.get("/modules")).data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
-
-async function updateModuleData(moduleId, content) {
-  try {
-    return (await api.post(`/modules/${moduleId}`, { content })).data;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-}
-
-async function getModuleById(moduleId) {
-  try {
-    return (await api.get(`/modules/${moduleId}`)).data;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-}
-
 async function getMe() {
   try {
     return (await api.get(`/auth/me`)).data;
@@ -71,9 +44,7 @@ async function logout() {
 }
 
 const ApiWrapperService = {
-  getAllModules,
-  updateModuleData,
-  getModuleById,
+  api,
   getMe,
   login,
   logout,

@@ -11,8 +11,9 @@ import {
 import "draft-js/dist/Draft.css";
 import "./style.css";
 import ApiWrapperService from "../../service/ApiWrapperService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { CommonHeader } from "../CommonHeader/CommonHeader";
+import ApiCourseService from "../../service/ApiCourseService";
 
 const BLOCK_TYPES = [
   { label: " “ ” ", style: "blockquote" },
@@ -36,10 +37,11 @@ function ArticleEditor() {
   const [activeBlockType, setActiveBlockType] = useState("unstyled");
   const [moduleData, setModuleData] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getModule() {
-      const module = await ApiWrapperService.getModuleById(id);
+      const module = await ApiCourseService.getModuleById(id);
       console.log(module);
 
       let initialEditorState;
@@ -113,9 +115,10 @@ function ArticleEditor() {
 
   async function saveContent() {
     const content = convertToRaw(editorState.getCurrentContent());
-    await ApiWrapperService.updateModuleData(
-      moduleData.id,
-      JSON.stringify(content)
+    moduleData.content = JSON.stringify(content);
+
+    setModuleData(
+      await ApiCourseService.updateModuleById(moduleData.id, moduleData)
     );
   }
 
@@ -127,6 +130,14 @@ function ArticleEditor() {
         {moduleData && (
           <>
             <div className="editor__toolbar">
+              <button
+                onClick={() =>
+                  navigate(`/creation-menu/course/${moduleData.courseId}`)
+                }
+              >
+                Voltar
+              </button>
+              <div className="editor__toolbar-separator">|</div>
               <div>{moduleData.title}</div>
               <div className="editor__toolbar-separator">|</div>
               <select

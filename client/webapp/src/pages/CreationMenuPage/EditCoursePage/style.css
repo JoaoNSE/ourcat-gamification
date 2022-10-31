@@ -1,0 +1,56 @@
+.edit-course {
+  background-color: rgb(200, 252, 255);
+  height: 100vh;
+}
+
+.edit-course__container {
+  padding-top: 10px;
+  margin: 0px 25%;
+}
+
+.edit-course__title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.edit-course__modules {
+  /* border-top: solid 2px rgb(96, 175, 255); */
+  margin-top: 20px;
+  padding-top: 5px;
+}
+
+.edit-course__modules-title {
+  background-color: rgb(96, 175, 255);
+  padding-left: 6px;
+  height: 30px;
+  font-size: 20px;
+  font-weight: 600;
+  border-bottom: solid 2px rgb(41, 111, 181);
+}
+
+.edit-course__modules-list {
+  background-color: white;
+}
+
+.edit-course__module {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 5px;
+  border-bottom: solid 1px rgb(96, 175, 255);
+}
+
+.edit-course__module:hover {
+  background-color: rgb(220, 220, 220);
+}
+
+.edit-course__module button {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 6px;
+  border: none;
+}
+
+.edit-course__module button:hover {
+  background-color: rgb(96, 175, 255);
+}

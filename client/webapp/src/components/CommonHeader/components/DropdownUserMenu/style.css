@@ -1,0 +1,45 @@
+.dropdown-user-menu {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-user-menu:hover .dropdown-user-menu__options {
+  display: block;
+}
+
+.dropdown-user-menu__chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dropdown-user-menu__chevron svg {
+  margin-left: 8px;
+  width: 10px;
+  cursor: pointer;
+}
+
+.dropdown-user-menu__options {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-user-menu__options div {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown-user-menu__options div:hover {
+  color: rgb(40, 94, 255);
+}

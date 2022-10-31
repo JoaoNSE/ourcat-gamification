@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ApiWrapperService from "../../service/ApiWrapperService";
+import { DropdownUserMenu } from "./components/DropdownUserMenu/DropdownUserMenu";
 import "./style.css";
 
 export function CommonHeader() {
@@ -45,13 +46,7 @@ export function CommonHeader() {
 
       {user && (
         <div className="common-header__user">
-          <div>Olá, {user.name} </div>
-          <button
-            className="common-header__logout-button"
-            onClick={handleLogout}
-          >
-            Sair
-          </button>
+          <DropdownUserMenu user={user} handleLogout={handleLogout} />
         </div>
       )}
       {!user && (

@@ -114,7 +114,7 @@ class CourseController {
       const id = req.params.moduleId;
       const { content, title, experience, courseId } = req.body;
 
-      const module = await this.courseService.updateModuleContent(
+      const module = await this.courseService.updateModuleById(
         id,
         content,
         title,
