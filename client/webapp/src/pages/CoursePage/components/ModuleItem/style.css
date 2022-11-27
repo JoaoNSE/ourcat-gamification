@@ -1,0 +1,73 @@
+.module-item {
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.module-item:hover {
+  background-color: #f5f5f5;
+}
+
+.module-item__title a {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  color: rgb(26, 132, 218);
+  cursor: pointer;
+  margin-left: 8px;
+  text-decoration: none;
+}
+
+.module-item__title-locked {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  color: rgb(116, 116, 116);
+  margin-left: 8px;
+  text-decoration: none;
+  cursor: default;
+}
+
+.module-item__icon {
+  width: 25px;
+  height: 25px;
+}
+
+.module-item__icon--done {
+  cursor: pointer;
+}
+
+.module-item__icon--done svg {
+  fill: #4caf50;
+}
+
+.module-item__icon--locker {
+  background-color: rgb(219, 219, 219);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.module-item__icon--locker svg {
+  fill: grey;
+  width: 15px;
+}
+
+.module-item__icon--doing {
+  background-color: rgb(219, 219, 219);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.module-item__icon--doing svg {
+  fill: grey;
+  width: 15px;
+}

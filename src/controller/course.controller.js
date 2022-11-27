@@ -22,13 +22,24 @@ class CourseController {
     try {
       let course;
 
+      course = await this.courseService.findCourseById(req.params.id, true);
+
       if (req.session.user) {
-        course = await this.courseService.findCourseByIdWithUserProgress(
+        let userProgress = await this.courseService.findCourseProgress(
           req.params.id,
           req.session.user.id
         );
-      } else {
-        course = await this.courseService.findCourseById(req.params.id);
+
+        userProgress = userProgress.map((p) => {
+          return {
+            moduleId: p.moduleId,
+            completed: p.completed > 0,
+            earnedXp: p.earnedXp,
+          };
+        });
+
+        console.log(userProgress);
+        course.userProgress = userProgress;
       }
 
       if (!course) {

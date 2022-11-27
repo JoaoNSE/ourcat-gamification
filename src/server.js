@@ -32,6 +32,8 @@ app.use(
 
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.static(__dirname + "/public"));
+
 app.use(router);
 
 app.listen(8080, () => {

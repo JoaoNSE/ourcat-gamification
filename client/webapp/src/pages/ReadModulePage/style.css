@@ -1,0 +1,29 @@
+.read-module-pag__container {
+  padding: 0px 100px;
+}
+
+.read-module-page__course-panel {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #f8fafc;
+  border-bottom: 2px solid #a3d1ff;
+}
+
+.read-module-page__course-panel a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.read-module-page__course-panel svg {
+  fill: #a9a9a9;
+  height: 15px;
+  width: 15px;
+  margin: 0px 5px;
+}
+
+.read-module-page__content {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}

@@ -1,52 +1,59 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CommonHeader } from "../../components/CommonHeader/CommonHeader";
+import ApiCourseService from "../../service/ApiCourseService";
 import ApiWrapperService from "../../service/ApiWrapperService";
 import "./style.css";
 
 export function HomePage() {
   const navigate = useNavigate();
-  const [modules, setModules] = useState([]);
+  const [courses, setCourses] = useState([]);
   const [user, setUser] = useState();
 
   useEffect(() => {
-    getModulesAndUser();
+    getCoursesAndUser();
 
-    async function getModulesAndUser() {
+    async function getCoursesAndUser() {
       try {
         const user = await ApiWrapperService.getMe();
         setUser(user);
       } catch (err) {}
 
-      setModules(await ApiWrapperService.getAllModules());
+      setCourses((await ApiCourseService.getAllCourses()).courses);
     }
   }, []);
 
   return (
     <>
       <CommonHeader />
-      <div className="home-page-container">
-        <div>Módulos Disponíveis (depois serão cursos)</div>
-        {modules &&
-          modules.map((module) => {
-            return (
-              <div key={module.id}>
-                <span>
-                  {module.title} -{" "}
-                  <button onClick={() => navigate(`/module/${module.id}`)}>
-                    Ler
-                  </button>
-                  {user?.role == "CREATOR" && (
-                    <button
-                      onClick={() => navigate(`/module/${module.id}/edit`)}
+      <div className="home-page">
+        <div className="home-page-container">
+          <div>Módulos Disponíveis (depois serão cursos)</div>
+          {courses &&
+            courses.map((course) => {
+              return (
+                <div key={course.id} className="course-card-mini">
+                  <div className="course-card-mini__badge">
+                    <img src={course.badgeImageRef} alt="insígnia" />
+                  </div>
+                  <div className="course-card-mini__details">
+                    <div
+                      className="course-card-mini__details-title"
+                      onClick={() => navigate(`course/${course.id}`)}
                     >
-                      Editar
-                    </button>
-                  )}
-                </span>
-              </div>
-            );
-          })}
+                      {course.name}
+                    </div>
+                    <div className="course-card-mini__details-description">
+                      {course.description}
+                    </div>
+                    <div className="course-card-mini__details-estimate">
+                      ~10 minutos
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
       </div>
     </>
   );

@@ -4,46 +4,29 @@ import { Editor, EditorState, convertFromRaw } from "draft-js";
 
 import "./style.css";
 import "draft-js/dist/Draft.css";
-import ApiWrapperService from "../../service/ApiWrapperService";
-import { useParams } from "react-router-dom";
-import { CommonHeader } from "../CommonHeader/CommonHeader";
 
-function ArticleViewer() {
+function ArticleViewer({ content }) {
   const [editorState, setEditorState] = useState(null);
-  const [moduleData, setModuleData] = useState(null);
-  const { id } = useParams();
 
   useEffect(() => {
-    async function getModule() {
-      const module = await ApiWrapperService.getModuleById(id);
-      console.log(module);
-
-      let initialEditorState;
-
-      try {
-        const contentObject = JSON.parse(module.content);
-        initialEditorState = EditorState.createWithContent(
-          convertFromRaw(contentObject)
-        );
-      } catch (error) {
-        initialEditorState = EditorState.createEmpty();
+    async function configureEditorState() {
+      if (!content) {
+        return;
       }
 
+      const contentObject = JSON.parse(content);
+      const initialEditorState = EditorState.createWithContent(
+        convertFromRaw(contentObject)
+      );
+
       setEditorState(initialEditorState);
-      setModuleData(module);
     }
 
-    getModule();
-  }, []);
+    configureEditorState();
+  }, [content]);
 
   return (
-    <>
-      <CommonHeader />
-      <div className="article-viewer__container">
-        {!moduleData && "Loading"}
-        {moduleData && <Editor editorState={editorState} readOnly={true} />}
-      </div>
-    </>
+    <>{editorState && <Editor editorState={editorState} readOnly={true} />}</>
   );
 }
 

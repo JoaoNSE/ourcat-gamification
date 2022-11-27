@@ -54,14 +54,23 @@ class CourseService {
 
     let progress = await course.getUserCourseModules({ where: { userId } });
 
-    console.log(progress);
-
     let values = course.dataValues;
     values.userProgress = progress.map((p) => p.dataValues);
 
     delete Object.assign(values, { modules: values.Modules }).Modules;
 
     return values;
+  }
+
+  async findCourseProgress(courseId, userId) {
+    const progress = await this.db.UserCourseModules.findAll({
+      where: {
+        courseId,
+        userId,
+      },
+    });
+
+    return progress.map((p) => p.dataValues);
   }
 
   async updateCourseById(id, badgeImageRef, name, description) {
