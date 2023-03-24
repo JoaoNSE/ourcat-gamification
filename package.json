@@ -8,7 +8,8 @@
     "dev": "nodemon src/server.js",
     "next-dev": "next dev",
     "test": "echo \"no tests yet\" && exit 1",
-    "sequelize": "node_modules/.bin/sequelize"
+    "sequelize": "node_modules/.bin/sequelize",
+    "sync-database": "node ./src/scripts/sync-database.js"
   },
   "repository": {
     "type": "git",
